@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCA Experts Academy, Bargarh</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8a2be2; /* Purple */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+        }
+        
+        .purple-btn {
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .purple-btn:hover {
+            background-color: #7623c7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(138, 43, 226, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+            color: #444;
+            font-weight: 500;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+        
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+            background-image: url('https://placehold.co/1600x900/e4e9f2/8a2be2?text=SCA+Experts+Academy');
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            position: relative;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .img-placeholder {
+            background-color: #e4e9f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8a8a8a;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .announcement-ticker {
+            background: rgba(138, 43, 226, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        /* Slideshow styling */
+        .slideshow {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        /* Footer styling */
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            color: white;
+        }
+        
+        .social-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        /* Attendance Table */
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .attendance-table th, .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .attendance-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .attendance-table tr:nth-child(even) {
+            background-color: #f5f7fa;
+        }
+        
+        /* For accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-16 h-16 mr-4 img-placeholder">
+                        <span>SCA Logo</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">SCA Experts Academy</h1>
+                </div>
+                
+                <button id="mobile-menu-button" class="md:hidden text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link active" data-section="home">Home</a>
+                    <a href="#announcements" class="nav-link" data-section="announcements">Announcements</a>
+                    <a href="#courses" class="nav-link" data-section="courses">Courses</a>
+                    <a href="#admissions" class="nav-link" data-section="admissions">Admissions</a>
+                    <a href="#about" class="nav-link" data-section="about">About Us</a>
+                    <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                    <a href="#" class="nav-link" id="prospectusBtn">Download Prospectus</a>
+                    <div class="relative group">
+                        <a href="#" class="nav-link flex items-center">
+                            Login <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md p-2 min-w-max">
+                            <a href="#student-login" class="block px-4 py-2 hover:bg-gray-100 rounded-md nav-link" data-section="student-login">Student Login</a>
+                            <a href="#faculty-login" class="block px-4 py-2 hover:bg-gray-100 rounded-md nav-link" data-section="faculty-login">Faculty Login</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <a href="#home" class="block py-2 nav-link active" data-section="home">Home</a>
+                <a href="#announcements" class="block py-2 nav-link" data-section="announcements">Announcements</a>
+                <a href="#courses" class="block py-2 nav-link" data-section="courses">Courses</a>
+                <a href="#admissions" class="block py-2 nav-link" data-section="admissions">Admissions</a>
+                <a href="#about" class="block py-2 nav-link" data-section="about">About Us</a>
+                <a href="#contact" class="block py-2 nav-link" data-section="contact">Contact</a>
+                <a href="#" class="block py-2 nav-link" id="mobileProspectusBtn">Download Prospectus</a>
+                <a href="#student-login" class="block py-2 nav-link" data-section="student-login">Student Login</a>
+                <a href="#faculty-login" class="block py-2 nav-link" data-section="faculty-login">Faculty Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container pb-16">
+        <!-- Home Section -->
+        <section id="home" class="section active pt-6">
+            <!-- Hero Section -->
+            <div class="hero-section rounded-xl overflow-hidden mb-16">
+                <div class="slideshow">
+                    <div class="slide active" style="background-image: url('https://placehold.co/1600x900/e4e9f2/8a2be2?text=SCA+Image+1')"></div>
+                    <div class="slide" style="background-image: url('https://placehold.co/1600x900/e4e9f2/8a2be2?text=SCA+Image+2')"></div>
+                    <div class="slide" style="background-image: url('https://placehold.co/1600x900/e4e9f2/8a2be2?text=SCA+Image+3')"></div>
+                    <div class="slide" style="background-image: url('https://placehold.co/1600x900/e4e9f2/8a2be2?text=SCA+Image+4')"></div>
+                    <div class="slide" style="background-image: url('https://placehold.co/1600x900/e4e9f2/8a2be2?text=SCA+Image+5')"></div>
+                </div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content flex items-center h-full">
+                    <div class="container mx-auto px-4 text-center text-white">
+                        <h1 class="text-5xl md:text-6xl font-bold mb-4">Welcome to SCA Experts Academy</h1>
+                        <p class="text-2xl md:text-3xl mb-2">Empowering Minds, Shaping Future</p>
+                        <p class="text-xl md:text-2xl mb-8">A Premier College for +2 Science/Commerce/Arts (CBSE/CHSE) & +3 Science/Commerce/Arts</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#courses" class="purple-btn px-8 py-3 rounded-lg text-lg font-semibold" data-section="courses">
+                                Explore Programs
+                            </a>
+                            <a href="#contact" class="bg-white text-gray-800 px-8 py-3 rounded-lg text-lg font-semibold transition-all hover:bg-gray-100 hover:shadow-md" data-section="contact">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leadership Messages -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-10">Leadership</h2>
+                
+                <!-- MD/Principal and Chairman Messages -->
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+                    <!-- MD/Principal's Message -->
+                    <div class="flex flex-col md:flex-row gap-6 card p-6">
+                        <div class="md:w-1/2 order-1 md:order-1">
+                            <h3 class="text-2xl font-semibold mb-4">Message from MD/Principal</h3>
+                            <p class="text-gray-700 mb-4">
+                                At SCA Experts Academy, we are committed to providing quality education that nurtures both academic excellence and personal growth. Our innovative teaching methods and dedicated faculty ensure that students are well-prepared for future challenges.
+                            </p>
+                            <p class="font-medium">
+                                - Shri Debadatta Birtia, M.D./Principal
+                            </p>
+                        </div>
+                        <div class="md:w-1/2 h-64 img-placeholder order-2 md:order-2">
+                            <span>MD/Principal Image</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chairman's Message -->
+                    <div class="flex flex-col md:flex-row gap-6 card p-6">
+                        <div class="md:w-1/2 h-64 img-placeholder order-2 md:order-1">
+                            <span>Chairman Image</span>
+                        </div>
+                        <div class="md:w-1/2 order-1 md:order-2">
+                            <h3 class="text-2xl font-semibold mb-4">Message from Chairman</h3>
+                            <p class="text-gray-700 mb-4">
+                                Our vision is to create an educational institution that serves as a beacon of knowledge and wisdom. We strive to empower our students with skills, values, and knowledge that will help them excel in their chosen fields and contribute meaningfully to society.
+                            </p>
+                            <p class="font-medium">
+                                - Dr. Debasis Birtia, Chairman
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Announcements Preview Section -->
+                <div class="mb-16">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold">Latest Announcements</h2>
+                        <a href="#announcements" class="purple-btn px-4 py-2 rounded-lg text-sm font-medium" data-section="announcements">
+                            View All
+                        </a>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card p-6">
+                            <div class="text-purple-600 font-semibold mb-2">March 15, 2025</div>
+                            <h3 class="text-xl font-bold mb-3">Admission Open for 2025-26</h3>
+                            <p class="text-gray-600 mb-4">Applications for the academic year 2025-26 are now open. Apply early to secure your spot.</p>
+                            <a href="#announcements" class="text-purple-600 font-medium hover:underline" data-section="announcements">Read more →</a>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 font-semibold mb-2">February 28, 2025</div>
+                            <h3 class="text-xl font-bold mb-3">Annual Cultural Festival</h3>
+                            <p class="text-gray-600 mb-4">Join us for three days of celebration showcasing talent, creativity, and cultural performances.</p>
+                            <a href="#announcements" class="text-purple-600 font-medium hover:underline" data-section="announcements">Read more →</a>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 font-semibold mb-2">February 15, 2025</div>
+                            <h3 class="text-xl font-bold mb-3">National Science Olympiad</h3>
+                            <p class="text-gray-600 mb-4">Registrations open for the National Science Olympiad. Showcase your scientific aptitude and win exciting prizes.</p>
+                            <a href="#announcements" class="text-purple-600 font-medium hover:underline" data-section="announcements">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Announcements Section -->
+        <section id="announcements" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-6">Announcements</h2>
+                <div class="grid gap-6">
+                    <div class="card p-6">
+                        <div class="text-purple-600 font-semibold mb-2">March 15, 2025</div>
+                        <h3 class="text-xl font-bold mb-3">Admission Open for 2025-26</h3>
+                        <p class="text-gray-600 mb-4">Applications for the academic year 2025-26 are now open. Apply early to secure your spot in your preferred program. The last date for submission is August 31, 2025.</p>
+                        <p class="text-gray-600 mb-4">Required documents include previous academic records, ID proof, and address verification. Visit our admissions office or apply online through our portal.</p>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <div class="text-purple-600 font-semibold mb-2">February 28, 2025</div>
+                        <h3 class="text-xl font-bold mb-3">Annual Cultural Festival</h3>
+                        <p class="text-gray-600 mb-4">Join us for three days of celebration showcasing talent, creativity, and cultural performances. The festival will include music, dance, drama, and various competitions.</p>
+                        <p class="text-gray-600 mb-4">All students, alumni, and parents are invited to participate and enjoy the festivities. The event will be held from March 20-22, 2025.</p>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <div class="text-purple-600 font-semibold mb-2">February 15, 2025</div>
+                        <h3 class="text-xl font-bold mb-3">National Science Olympiad</h3>
+                        <p class="text-gray-600 mb-4">Registrations open for the National Science Olympiad. Showcase your scientific aptitude and win exciting prizes. The competition will test knowledge across Physics, Chemistry, and Biology.</p>
+                        <p class="text-gray-600 mb-4">Interested students can register with their class teachers by March 10, 2025. The preliminary round will be held on March 25, 2025.</p>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <div class="text-purple-600 font-semibold mb-2">February 5, 2025</div>
+                        <h3 class="text-xl font-bold mb-3">Parent-Teacher Meeting</h3>
+                        <p class="text-gray-600 mb-4">The semester Parent-Teacher Meeting is scheduled for February 20, 2025. Parents are requested to attend to discuss their child's academic progress and overall development.</p>
+                        <p class="text-gray-600 mb-4">The meeting will be held from 9:00 AM to 1:00 PM. Please confirm your attendance through the student portal.</p>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <div class="text-purple-600 font-semibold mb-2">January 25, 2025</div>
+                        <h3 class="text-xl font-bold mb-3">Career Counseling Workshop</h3>
+                        <p class="text-gray-600 mb-4">A career counseling workshop will be conducted for all final-year students. Industry experts and alumni will guide students on career options, higher education, and skill development.</p>
+                        <p class="text-gray-600 mb-4">The workshop will be held on February 10, 2025, at the college auditorium from 10:00 AM to 3:00 PM.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Courses Section -->
+        <section id="courses" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-10">Our Programs</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- +2 Science Card -->
+                    <div class="card overflow-hidden">
+                        <div class="h-48 img-placeholder">
+                            <span>+2 Science Image</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">+2 Science (CBSE/CHSE)</h3>
+                            <p class="text-gray-600 mb-4">Our science program focuses on Physics, Chemistry, Biology, and Mathematics with state-of-the-art laboratories and expert faculty.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-500">Duration: 2 Years</span>
+                                <a href="#admissions" class="purple-btn px-4 py-2 rounded-lg text-sm" data-section="admissions">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- +2 Commerce Card -->
+                    <div class="card overflow-hidden">
+                        <div class="h-48 img-placeholder">
+                            <span>+2 Commerce Image</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">+2 Commerce (CBSE/CHSE)</h3>
+                            <p class="text-gray-600 mb-4">Comprehensive commerce education with focus on Accountancy, Business Studies, Economics, and practical business knowledge.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-500">Duration: 2 Years</span>
+                                <a href="#admissions" class="purple-btn px-4 py-2 rounded-lg text-sm" data-section="admissions">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- +2 Arts Card -->
+                    <div class="card overflow-hidden">
+                        <div class="h-48 img-placeholder">
+                            <span>+2 Arts Image</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">+2 Arts (CBSE/CHSE)</h3>
+                            <p class="text-gray-600 mb-4">Diverse arts curriculum with subjects ranging from History, Political Science, Sociology, Psychology to Literature.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-500">Duration: 2 Years</span>
+                                <a href="#admissions" class="purple-btn px-4 py-2 rounded-lg text-sm" data-section="admissions">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- +3 Science Card -->
+                    <div class="card overflow-hidden">
+                        <div class="h-48 img-placeholder">
+                            <span>+3 Science Image</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">+3 Science</h3>
+                            <p class="text-gray-600 mb-4">Advanced scientific education with specializations in Physics, Chemistry, Mathematics, and Biological Sciences.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-500">Duration: 3 Years</span>
+                                <a href="#admissions" class="purple-btn px-4 py-2 rounded-lg text-sm" data-section="admissions">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- +3 Commerce Card -->
+                    <div class="card overflow-hidden">
+                        <div class="h-48 img-placeholder">
+                            <span>+3 Commerce Image</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">+3 Commerce</h3>
+                            <p class="text-gray-600 mb-4">In-depth commerce education with specializations in Accounting, Finance, Marketing, and Business Management.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-500">Duration: 3 Years</span>
+                                <a href="#admissions" class="purple-btn px-4 py-2 rounded-lg text-sm" data-section="admissions">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- +3 Arts Card -->
+                    <div class="card overflow-hidden">
+                        <div class="h-48 img-placeholder">
+                            <span>+3 Arts Image</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">+3 Arts</h3>
+                            <p class="text-gray-600 mb-4">Advanced humanities education with specializations in various liberal arts disciplines and social sciences.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-500">Duration: 3 Years</span>
+                                <a href="#admissions" class="purple-btn px-4 py-2 rounded-lg text-sm" data-section="admissions">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Admissions Section -->
+        <section id="admissions" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-10">Admissions</h2>
+                
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- Important Dates and Information -->
+                    <div>
+                        <div class="card p-6 mb-8">
+                            <h3 class="text-xl font-bold mb-4">Important Dates</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-calendar-check text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Application Start:</span> April 01, 2025
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-calendar-times text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Application End:</span> August 31, 2025
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-file-alt text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Document Verification:</span> August 25-31, 2025
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chalkboard-teacher text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Classes Begin:</span> September 1, 2025
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <h3 class="text-xl font-bold mb-4">Required Documents</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-certificate text-purple-600 mt-1 mr-3"></i>
+                                    <div>Mark sheets of previous academic qualifications</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-id-card text-purple-600 mt-1 mr-3"></i>
+                                    <div>Transfer Certificate (TC) from previous institution</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-address-card text-purple-600 mt-1 mr-3"></i>
+                                    <div>Character Certificate</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-portrait text-purple-600 mt-1 mr-3"></i>
+                                    <div>Recent passport size photographs (4 copies)</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-id-badge text-purple-600 mt-1 mr-3"></i>
+                                    <div>Photo ID proof (Aadhaar card/PAN card/Passport)</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-home text-purple-600 mt-1 mr-3"></i>
+                                    <div>Address proof</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Application Form -->
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-6">Apply for Admission</h3>
+                        <form id="admissionForm">
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="firstName" class="block text-gray-700 mb-1">First Name *</label>
+                                    <input type="text" id="firstName" class="w-full p-2 border rounded-lg" required>
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-gray-700 mb-1">Last Name *</label>
+                                    <input type="text" id="lastName" class="w-full p-2 border rounded-lg" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-1">Email *</label>
+                                <input type="email" id="email" class="w-full p-2 border rounded-lg" required>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="phone" class="block text-gray-700 mb-1">Phone Number *</label>
+                                    <input type="tel" id="phone" class="w-full p-2 border rounded-lg" required>
+                                </div>
+                                <div>
+                                    <label for="altPhone" class="block text-gray-700 mb-1">Alternative Phone Number</label>
+                                    <input type="tel" id="altPhone" class="w-full p-2 border rounded-lg">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="address" class="block text-gray-700 mb-1">Address *</label>
+                                <textarea id="address" rows="3" class="w-full p-2 border rounded-lg" required></textarea>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="program" class="block text-gray-700 mb-1">Program of Interest *</label>
+                                    <select id="program" class="w-full p-2 border rounded-lg" required>
+                                        <option value="">Select a program</option>
+                                        <option value="+2 Science">+2 Science</option>
+                                        <option value="+2 Commerce">+2 Commerce</option>
+                                        <option value="+2 Arts">+2 Arts</option>
+                                        <option value="+3 Science">+3 Science</option>
+                                        <option value="+3 Commerce">+3 Commerce</option>
+                                        <option value="+3 Arts">+3 Arts</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="stream" class="block text-gray-700 mb-1">Stream *</label>
+                                    <select id="stream" class="w-full p-2 border rounded-lg" required>
+                                        <option value="">Select a stream</option>
+                                        <option value="CBSE">CBSE</option>
+                                        <option value="CHSE">CHSE</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-1">Additional Information</label>
+                                <textarea id="message" rows="4" class="w-full p-2 border rounded-lg"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="purple-btn px-6 py-3 rounded-lg font-semibold w-full">
+                                Submit Application
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Section -->
+        <section id="about" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-10">About SCA Experts Academy</h2>
+                
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+                    <div>
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-semibold mb-4">Our Vision & Mission</h3>
+                            <p class="text-gray-700 mb-4">
+                                At SCA Experts Academy, we envision creating a learning environment that nurtures intellectual growth, critical thinking, and personal development. Our mission is to provide quality education that equips students with knowledge, skills, and values needed to excel in their chosen fields and become responsible citizens.
+                            </p>
+                            <p class="text-gray-700">
+                                We strive to foster a culture of innovation, research, and continuous learning that helps students adapt to the evolving demands of society and contribute meaningfully to its progress.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4">Our Values</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-star text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Excellence:</span> Striving for the highest standards in education and character.
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-handshake text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Integrity:</span> Upholding honesty, ethics, and transparency in all actions.
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-users text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Inclusivity:</span> Respecting diversity and creating equal opportunities for all.
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-lightbulb text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <span class="font-medium">Innovation:</span> Encouraging creative thinking and adapting to changing times.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="h-96 img-placeholder">
+                        <span>College Campus Image</span>
+                    </div>
+                </div>
+                
+                <!-- Leadership Team -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-8 text-center">Our Leadership Team</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Chairman -->
+                        <div class="card p-6 flex flex-col items-center text-center">
+                            <div class="w-40 h-40 rounded-full img-placeholder mb-4">
+                                <span>Chairman Photo</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-1">Dr. Debasis Birtia</h4>
+                            <p class="text-purple-600 font-medium mb-4">Chairman</p>
+                            <p class="text-gray-700">
+                                With over 25 years of experience in education, Dr. Birtia has been instrumental in establishing SCA Experts Academy as a center of academic excellence. His visionary leadership continues to guide the institution toward greater heights.
+                            </p>
+                        </div>
+                        
+                        <!-- MD/Principal -->
+                        <div class="card p-6 flex flex-col items-center text-center">
+                            <div class="w-40 h-40 rounded-full img-placeholder mb-4">
+                                <span>MD/Principal Photo</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-1">Shri Debadatta Birtia</h4>
+                            <p class="text-purple-600 font-medium mb-4">M.D./Principal</p>
+                            <p class="text-gray-700">
+                                As the Managing Director and Principal, Shri Debadatta Birtia oversees the academic and administrative operations of the institution. His dedication to educational excellence and student welfare has been the driving force behind the college's success.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Facilities -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 text-center">Our Facilities</h3>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card p-6">
+                            <div class="text-purple-600 text-4xl mb-4">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Modern Laboratories</h4>
+                            <p class="text-gray-700">
+                                Well-equipped science and computer laboratories with the latest tools and technologies for practical learning.
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 text-4xl mb-4">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Library</h4>
+                            <p class="text-gray-700">
+                                Extensive collection of books, journals, and digital resources to support research and learning.
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 text-4xl mb-4">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">ICT Infrastructure</h4>
+                            <p class="text-gray-700">
+                                Smart classrooms with modern audio-visual equipment and high-speed internet connectivity.
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 text-4xl mb-4">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Sports Facilities</h4>
+                            <p class="text-gray-700">
+                                Extensive sports grounds and indoor facilities for various games and physical activities.
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 text-4xl mb-4">
+                                <i class="fas fa-microphone-alt"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Auditorium</h4>
+                            <p class="text-gray-700">
+                                State-of-the-art auditorium for cultural events, seminars, and conferences.
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="text-purple-600 text-4xl mb-4">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Career Guidance</h4>
+                            <p class="text-gray-700">
+                                Dedicated career counseling cell to guide students for higher education and job opportunities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-10">Contact Us</h2>
+                
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div>
+                        <div class="card p-6 mb-8">
+                            <h3 class="text-xl font-bold mb-6">Get in Touch</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="text-purple-600 text-xl mt-1 mr-4">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Address</h4>
+                                        <p class="text-gray-700">Gourpada, Ward No.11, Backside of Women's College, Bargarh, Odisha – 768028</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-purple-600 text-xl mt-1 mr-4">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Phone</h4>
+                                        <p class="text-gray-700">+91 80939 36118 / +91 82499 98923 / +91 90909 37385</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-purple-600 text-xl mt-1 mr-4">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Email</h4>
+                                        <p class="text-gray-700">scaexpertsacademy@gmail.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-purple-600 text-xl mt-1 mr-4">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Office Hours</h4>
+                                        <p class="text-gray-700">Monday - Saturday: 9:00 AM - 5:00 PM</p>
+                                        <p class="text-gray-700">Sunday: Closed</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <h4 class="font-medium mb-3">Connect With Us</h4>
+                                <div class="flex space-x-3">
+                                    <a href="https://www.facebook.com/p/Science-Experts-Academy-Bargarh-100090689542261/?checkpoint_src=any" target="_blank" class="social-icon">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/scaexpertsacademy/" target="_blank" class="social-icon">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="https://maps.app.goo.gl/L5upujeZ8AFFXPhR8" target="_blank" class="social-icon">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <h3 class="text-xl font-bold mb-4">Send us a Message</h3>
+                            <form id="contactForm">
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label for="contactName" class="block text-gray-700 mb-1">Name *</label>
+                                        <input type="text" id="contactName" class="w-full p-2 border rounded-lg" required>
+                                    </div>
+                                    <div>
+                                        <label for="contactEmail" class="block text-gray-700 mb-1">Email *</label>
+                                        <input type="email" id="contactEmail" class="w-full p-2 border rounded-lg" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="contactSubject" class="block text-gray-700 mb-1">Subject *</label>
+                                    <input type="text" id="contactSubject" class="w-full p-2 border rounded-lg" required>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <label for="contactMessage" class="block text-gray-700 mb-1">Message *</label>
+                                    <textarea id="contactMessage" rows="4" class="w-full p-2 border rounded-lg" required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="purple-btn px-6 py-3 rounded-lg font-semibold">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="h-full card p-2">
+                        <div class="w-full h-full overflow-hidden rounded-lg">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3729.013544083809!2d83.6226!3d21.3334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDIwJzAwLjIiTiA4M8KwMzcnMjAuOSJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Student Login Section -->
+        <section id="student-login" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-10 text-center">Student Portal</h2>
+                
+                <div class="flex flex-col md:flex-row gap-10">
+                    <!-- Login Form -->
+                    <div class="login-container p-8 md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Student Login</h3>
+                        <form id="studentLoginForm">
+                            <div class="mb-4">
+                                <label for="studentId" class="block text-gray-700 mb-1">Student ID *</label>
+                                <input type="text" id="studentId" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="studentPassword" class="block text-gray-700 mb-1">Password *</label>
+                                <input type="password" id="studentPassword" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="studentRemember" class="mr-2">
+                                    <label for="studentRemember" class="text-gray-700">Remember me</label>
+                                </div>
+                                <a href="#" class="text-purple-600 hover:underline">Forgot password?</a>
+                            </div>
+                            
+                            <button type="submit" class="purple-btn px-6 py-3 rounded-lg font-semibold w-full">
+                                Login
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Student Services -->
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-6">Student Services</h3>
+                        
+                        <div class="grid gap-4">
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Academic Records</h4>
+                                        <p class="text-sm text-gray-600">Access your grades, attendance, and academic progress</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Attendance</h4>
+                                        <p class="text-sm text-gray-600">View your attendance records and reports</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-book-open"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Course Materials</h4>
+                                        <p class="text-sm text-gray-600">Download lecture notes, assignments, and study materials</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Examination</h4>
+                                        <p class="text-sm text-gray-600">View exam schedules, hall tickets, and results</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-rupee-sign"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Fee Payment</h4>
+                                        <p class="text-sm text-gray-600">Pay fees online and view payment history</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sample Attendance View (Hidden initially, shown after login) -->
+                <div id="attendanceView" class="mt-10" style="display: none;">
+                    <h3 class="text-2xl font-bold mb-6">Your Attendance Record</h3>
+                    
+                    <div class="card p-6">
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-lg font-semibold">Current Semester Attendance</h4>
+                                <div class="text-purple-600 font-bold text-lg">
+                                    Overall: 92%
+                                </div>
+                            </div>
+                            
+                            <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+                                <div class="bg-purple-600 h-4 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="attendance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Classes Held</th>
+                                        <th>Classes Attended</th>
+                                        <th>Percentage</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Physics</td>
+                                        <td>48</td>
+                                        <td>45</td>
+                                        <td>93.75%</td>
+                                        <td><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Good</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chemistry</td>
+                                        <td>45</td>
+                                        <td>42</td>
+                                        <td>93.33%</td>
+                                        <td><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Good</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mathematics</td>
+                                        <td>50</td>
+                                        <td>48</td>
+                                        <td>96.00%</td>
+                                        <td><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Good</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>English</td>
+                                        <td>30</td>
+                                        <td>26</td>
+                                        <td>86.67%</td>
+                                        <td><span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">Average</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Computer Science</td>
+                                        <td>42</td>
+                                        <td>38</td>
+                                        <td>90.48%</td>
+                                        <td><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Good</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h5 class="font-medium mb-2">Note:</h5>
+                            <ul class="text-sm text-gray-700 list-disc pl-5">
+                                <li>Minimum 75% attendance is required to be eligible for examinations.</li>
+                                <li>Medical leaves will be considered only with proper documentation.</li>
+                                <li>For any discrepancies in the attendance record, please contact your class teacher.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Faculty Login Section -->
+        <section id="faculty-login" class="section pt-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-10 text-center">Faculty Portal</h2>
+                
+                <div class="flex flex-col md:flex-row gap-10">
+                    <!-- Login Form -->
+                    <div class="login-container p-8 md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Faculty Login</h3>
+                        <form id="facultyLoginForm">
+                            <div class="mb-4">
+                                <label for="facultyId" class="block text-gray-700 mb-1">Faculty ID *</label>
+                                <input type="text" id="facultyId" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="facultyPassword" class="block text-gray-700 mb-1">Password *</label>
+                                <input type="password" id="facultyPassword" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="facultyRemember" class="mr-2">
+                                    <label for="facultyRemember" class="text-gray-700">Remember me</label>
+                                </div>
+                                <a href="#" class="text-purple-600 hover:underline">Forgot password?</a>
+                            </div>
+                            
+                            <button type="submit" class="purple-btn px-6 py-3 rounded-lg font-semibold w-full">
+                                Login
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Faculty Services -->
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-6">Faculty Services</h3>
+                        
+                        <div class="grid gap-4">
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Class Management</h4>
+                                        <p class="text-sm text-gray-600">Manage your classes, schedules, and teaching resources</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Attendance Management</h4>
+                                        <p class="text-sm text-gray-600">Update and manage student attendance records</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Assessment</h4>
+                                        <p class="text-sm text-gray-600">Create, manage, and grade student assessments</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Announcements</h4>
+                                        <p class="text-sm text-gray-600">Post announcements for students and other faculty</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-4">
+                                <div class="flex items-center">
+                                    <div class="text-purple-600 text-2xl mr-4">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Reports</h4>
+                                        <p class="text-sm text-gray-600">Generate and view various academic reports</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sample Attendance Management (Hidden initially, shown after login) -->
+                <div id="attendanceManagement" class="mt-10" style="display: none;">
+                    <h3 class="text-2xl font-bold mb-6">Attendance Management</h3>
+                    
+                    <div class="card p-6">
+                        <div class="mb-6 flex flex-wrap justify-between items-center">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-2">Class: +2 Science (CBSE)</h4>
+                                <p class="text-gray-600">Subject: Physics | Date: June 10, 2025</p>
+                            </div>
+                            
+                            <div class="flex space-x-4 mt-4 sm:mt-0">
+                                <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-gray-700 font-medium">
+                                    Previous Day
+                                </button>
+                                <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-gray-700 font-medium">
+                                    Next Day
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto mb-6">
+                            <table class="attendance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Roll No.</th>
+                                        <th>Student Name</th>
+                                        <th>Period 1</th>
+                                        <th>Period 2</th>
+                                        <th>Period 3</th>
+                                        <th>Period 4</th>
+                                        <th>Overall</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>Aarav Sharma</td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>95%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Diya Patel</td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>90%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>003</td>
+                                        <td>Arjun Reddy</td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>004</td>
+                                        <td>Ananya Mishra</td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>92%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>005</td>
+                                        <td>Rohan Verma</td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="p-1 border rounded">
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                                <option value="late">Late</option>
+                                            </select>
+                                        </td>
+                                        <td>88%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-4">
+                            <button class="bg-gray-200 hover:bg-gray-300 px-6 py-2 rounded-lg text-gray-700 font-medium">
+                                Reset
+                            </button>
+                            <button class="purple-btn px-6 py-2 rounded-lg font-medium">
+                                Save Attendance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">SCA Experts Academy</h3>
+                    <p class="text-gray-300 mb-4">
+                        Providing quality education and shaping the future of students since 2010. Our commitment to excellence makes us one of the premier educational institutions in Odisha.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="https://www.facebook.com/p/Science-Experts-Academy-Bargarh-100090689542261/?checkpoint_src=any" target="_blank" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/scaexpertsacademy/" target="_blank" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://maps.app.goo.gl/L5upujeZ8AFFXPhR8" target="_blank" class="social-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors" data-section="home">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors" data-section="about">About Us</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">Courses</a></li>
+                        <li><a href="#admissions" class="text-gray-300 hover:text-white transition-colors" data-section="admissions">Admissions</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors" data-section="contact">Contact</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors" id="footerProspectusBtn">Download Prospectus</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Programs</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">+2 Science (CBSE/CHSE)</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">+2 Commerce (CBSE/CHSE)</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">+2 Arts (CBSE/CHSE)</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">+3 Science</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">+3 Commerce</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors" data-section="courses">+3 Arts</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Contact Information</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">Gourpada, Ward No.11, Backside of Women's College, Bargarh, Odisha – 768028</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-purple-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">+91 80939 36118 / +91 82499 98923 / +91 90909 37385</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-purple-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">scaexpertsacademy@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-purple-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">Monday - Saturday: 9:00 AM - 5:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">
+                        © 2025 SCA Experts Academy. All Rights Reserved.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navigation and section visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Section navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const sectionId = this.getAttribute('data-section');
+                    if (sectionId) {
+                        e.preventDefault();
+                        
+                        // Hide all sections
+                        sections.forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        
+                        // Show selected section
+                        const targetSection = document.getElementById(sectionId);
+                        if (targetSection) {
+                            targetSection.classList.add('active');
+                            
+                            // Update active nav link
+                            navLinks.forEach(navLink => {
+                                navLink.classList.remove('active');
+                            });
+                            
+                            // Set clicked link as active
+                            this.classList.add('active');
+                            
+                            // Close mobile menu if open
+                            mobileMenu.classList.add('hidden');
+                            
+                            // Scroll to top of the section
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Slideshow functionality
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                slides[index].classList.add('active');
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            // Change slide every 5 seconds
+            setInterval(nextSlide, 5000);
+            
+            // Login form submissions
+            const studentLoginForm = document.getElementById('studentLoginForm');
+            const facultyLoginForm = document.getElementById('facultyLoginForm');
+            const attendanceView = document.getElementById('attendanceView');
+            const attendanceManagement = document.getElementById('attendanceManagement');
+            
+            if (studentLoginForm) {
+                studentLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would validate credentials here
+                    // For demo purposes, just show the attendance view
+                    if (attendanceView) {
+                        attendanceView.style.display = 'block';
+                    }
+                });
+            }
+            
+            if (facultyLoginForm) {
+                facultyLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would validate credentials here
+                    // For demo purposes, just show the attendance management view
+                    if (attendanceManagement) {
+                        attendanceManagement.style.display = 'block';
+                    }
+                });
+            }
+            
+            // Admission form submission
+            const admissionForm = document.getElementById('admissionForm');
+            if (admissionForm) {
+                admissionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your application! We will contact you soon.');
+                    this.reset();
+                });
+            }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+            
+            // Prospectus download buttons
+            const prospectusBtn = document.getElementById('prospectusBtn');
+            const mobileProspectusBtn = document.getElementById('mobileProspectusBtn');
+            const footerProspectusBtn = document.getElementById('footerProspectusBtn');
+            
+            const handleProspectusDownload = function(e) {
+                e.preventDefault();
+                alert('Prospectus will be downloaded. This functionality will be implemented with the actual file.');
+            };
+            
+            if (prospectusBtn) prospectusBtn.addEventListener('click', handleProspectusDownload);
+            if (mobileProspectusBtn) mobileProspectusBtn.addEventListener('click', handleProspectusDownload);
+            if (footerProspectusBtn) footerProspectusBtn.addEventListener('click', handleProspectusDownload);
+        });
+    </script>
+</body>
+</html>
